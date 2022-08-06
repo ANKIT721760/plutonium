@@ -4,14 +4,14 @@ function trimString(){
     console.log("After excute trim function ",stringSomething.trim()+". ")
 }
 function changetoLowerCase(){
-    const changetoLowerString="KAluRam"
-    console.log("This is string before change to lowerCase",changetoLowerString)
-    console.log("This is string after change to lowerCase",changetoLowerString.toLowerCase())
+    const changetoLowerString="ankit raj kashyap"
+    console.log(changetoLowerString)
+    console.log(changetoLowerString.toLowerCase())
 }
 function changeToUpperCase(){
-    const changetoUpperString="hEllo kaluRAm"
-    console.log("This is string before change to lowerCase",changetoUpperString)
-    console.log("This is the string after change to upperCase",changetoUpperString.toUpperCase())
+    const changetoUpperString="ankit kashyap"
+    console.log(changetoUpperString)
+    console.log(changetoUpperString.toUpperCase())
 }
 module.exports.trimString=trimString
 module.exports.changetoLowerCase=changetoLowerCase
