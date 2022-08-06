@@ -11,7 +11,7 @@ router.get('/test-me', function (req, res) {
     res.send('My second ever api!')
 
 });
-router.get('/test-me', function (req, res) {
+router.get('/test-me2', function (req, res) {
     res.send('My first ever api! Hello ankit,How are you dear?')
     logger.welcome();
     helper.printDate()
