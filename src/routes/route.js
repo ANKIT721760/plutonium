@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/test-me', function (req, res) {
     console.log('My batch is', abc.name)
     abc.printName()
-    logger.welcome()
+    //logger.welcome()
 
     res.send('My second ever api!')
 });
@@ -98,6 +98,18 @@ router.get('/films/:filmId', function (req, res) {
      }
 });
 
+router.get('/sol1', function (req, res) {
+
+    let arr=[1,2,3,4,5,6,7,8,10]
+    let sumNatural = (arr[arr.length-1]*(arr[arr.length-1]+1))/2;
+    let sumArray=0;
+    arr.forEach(x=> sumArray=sumArray+x);
+    let missingNumber= sumNatural-sumArray;
+
+    res.send("The missing number is:- "+missingNumber)
+
+    
+});
 
 
 module.exports = router;
