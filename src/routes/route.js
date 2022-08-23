@@ -7,14 +7,16 @@ const publisherController=require("../controllers/publisherController")
 
 
 
-router.post("/createAuthor", authorController.createAuthor)
+router.post("/createAuthor", authorController.createAuthor);
 
-router.post("/createPublisher",publisherController.createPublisher)
+router.get("/getAuthorsData", authorController.getAuthorsData);
 
-router.post("/createBook",bookController.createBook)
+router.post("/createPublisher", publisherController.createPublisher);
 
-router.get("/getBooksData",bookController.getBooksData)
+router.get("/getPublishersData", publisherController.getPublishersData);
 
-router.put("/updateSchema",)
+router.post("/createBook", bookController.createBook  )
+
+router.get("/getBooksData", bookController.getBooksData)
 
 module.exports = router;
