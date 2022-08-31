@@ -24,10 +24,10 @@ const loginUser = async function (req, res) {
     let token = jwt.sign(
       {
         userId: user._id.toString(),
-        batch: "Radon",
+        batch: "plutonium",
         organisation: "FunctionUp",
       },
-      "functionup-radon"
+      "functionup-plutonium"
     );
     res.setHeader("x-auth-token", token);
     res.status(201).send({ status: true, token: token });

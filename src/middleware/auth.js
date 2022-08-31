@@ -10,7 +10,7 @@ const mid=async function(req,res,next){
     if (!token) {
       return res.status(404).send({ status: false, msg: "token must be present" });
     }
-  let decodedToken = jwt.verify(token, "functionup-radon");
+  let decodedToken = jwt.verify(token, "functionup-plutonium");
     if (!decodedToken) {
       return res.status(404).send({ status: false, msg: "token is invalid" });
     }
@@ -24,7 +24,7 @@ const mid1=async function (req,res,next){
   try{
     let token = req.headers["x-Auth-token"];
     if (!token) token = req.headers["x-auth-token"];
-    let decodedToken = jwt.verify(token, "functionup-radon");
+    let decodedToken = jwt.verify(token, "functionup-plutonium");
 
     //userId for which the request is made. In this case message to be posted.
   let userToBeModified = req.params.userId
