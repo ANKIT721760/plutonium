@@ -1,5 +1,6 @@
 const authorModel = require("../model/authorModel");
 const blogsModel = require("../model/blogsModel");
+const moment = require("moment");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 //===============================//  createBlog  //==========================================================//
@@ -22,7 +23,7 @@ const createBlog = async function (req, res) {
     if (!validObjectId) {
       return res.status(400).send({ msg: "Please provide a valid authorid" });
     }
-    let findAuthor = await authorModel.findById(authorId);
+    let findAuthor = await authorModel.findOne({authorId ,isDeleted:false});
     if (!findAuthor) {
       return res.status(404).send({ msg: "AuthorId does not exist" });
     }
@@ -68,7 +69,7 @@ const updateblog = async function (req, res) {
     }
     if (isPublished) {
       myBody.isPublished = true;
-      myBody.publishedAt = Date();
+      myBody.publishedAt = new Date()
     }
     let blogId = req.params.blogId;
     
