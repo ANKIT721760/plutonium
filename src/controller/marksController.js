@@ -46,7 +46,7 @@ const createMarks = async function (req, res) {
             return res.status(400).send({ status: false, message: "marks is required" })
 
 
-        const alreadyExist = await marksModel.findOne({ name, subject, userId: req.userId, isDeleted:false})
+        const alreadyExist = await marksModel.findOne({ name, subject, isDeleted:false})
         
         if (alreadyExist == null) {
             const marks_data = await marksModel.create(data)

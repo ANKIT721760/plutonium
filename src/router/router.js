@@ -9,7 +9,7 @@ router.post("/register",userController.createUser,)
 router.post("/login", userController.loginUser,)
 
 //?============================ Marks ========================
-router.post("/marks/:userId",mw.authentication,mw.authorization , marksController.createMarks,)
+router.post("/marks",mw.authentication,mw.authorization , marksController.createMarks,)
 router.get("/marksAll", mw.authentication,  marksController.getMarks,)
 router.put("/updateMarks/:marksId", mw.authentication, mw.authorization, marksController.updateMarks,)
 router.delete("/deleteMarks/:marksId", mw.authentication, mw.authorization, marksController.deleteMarks,)

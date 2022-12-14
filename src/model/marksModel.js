@@ -5,7 +5,7 @@ const marksSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true
+   
     },
     subject: {
         type: String,

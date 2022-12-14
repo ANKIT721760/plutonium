@@ -52,7 +52,7 @@ const authorization = async function (req, res, next) {
 
         if (!mongoose.isValidObjectId(userId)) {
             return res.status(400).send({ status: false, msg: 'Please enter valid userId Id in req.body' })
-        }
+        }    
         let userData = await userModel.findById(userId)
         if (!userData) {
             return res.status(404).send({ status: false, message: "UserId not found " })
