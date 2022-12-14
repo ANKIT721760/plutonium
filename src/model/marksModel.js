@@ -10,7 +10,7 @@ const marksSchema = new mongoose.Schema({
     subject: {
         type: String,
         required: true,
-        unique: true
+        //unique: true
     },
     marks: {
         type: Number,
@@ -18,9 +18,10 @@ const marksSchema = new mongoose.Schema({
 
     },
     userId: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
+
     isDeleted: {
         type: Boolean,
         default: false

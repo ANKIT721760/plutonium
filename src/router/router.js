@@ -9,15 +9,15 @@ router.post("/register",userController.createUser,)
 router.post("/login", userController.loginUser,)
 
 //?============================ Marks ========================
-router.post("/marks",  marksController.createMarks,)
-router.get("/marksAll", marksController.getMarks,)
-router.put("/updateMarks/:marksId", marksController.updateMarks,)
-router.delete("/deleteMarks/:marksId", marksController.deleteMarks,)
+router.post("/marks/:userId",mw.authentication,mw.authorization , marksController.createMarks,)
+router.get("/marksAll", mw.authentication,  marksController.getMarks,)
+router.put("/updateMarks/:marksId", mw.authentication, mw.authorization, marksController.updateMarks,)
+router.delete("/deleteMarks/:marksId", mw.authentication, mw.authorization, marksController.deleteMarks,)
 
 
 //?============================ Check all URL ========================
 router.all("/**", function (req, res) {
-     console.log("Invalid Url")
+     res.status(400).send({status:false,message:"Invalid URL"})
  })
 
 module.exports = router;

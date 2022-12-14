@@ -20,7 +20,7 @@ const createMarks = async function (req, res) {
     try {
     
         let data = req.body
-        let { name, subject, marks ,userId} = data
+        let { name, subject, marks } = data
 
         if (Object.keys(data).length === 0) {
             return res.status(400).send({ status: false, message: "please provide data in the body" })
@@ -37,23 +37,16 @@ const createMarks = async function (req, res) {
         if (!isValid(subject))
             return res.status(400).send({ status: false, message: "Incorrect subject" })
 
+        if (marks) {
+            if (!Number(marks))
+                return res.status(400).send({ status: false, message: "Incorrect marks" })
 
+        }
         if (!(marks))
             return res.status(400).send({ status: false, message: "marks is required" })
 
 
-        let doc = await userModel.findById({ _id: userId, isDeleted: false })
-        let user_Id = doc._id.toString()
-
-          // Authorization 
-        const tokenId = req.decodedToken.userId;
-        if (user_Id !== tokenId) {
-            return res.status(403).send({status: false, message: "UnAuthorized"});
-
-        }
-
-
-        const alreadyExist = await marksModel.findOne({ name, subject , isDeleted:false})
+        const alreadyExist = await marksModel.findOne({ name, subject, userId: req.userId, isDeleted:false})
         
         if (alreadyExist == null) {
             const marks_data = await marksModel.create(data)
@@ -89,8 +82,10 @@ const getMarks = async function (req, res) {
 
 
     try {
+
         const { name, subject } = req.query
         let filter = { isDeleted: false }
+
         if (name) {
             filter.name = { $regex: name, $options: 'i' }
         }
@@ -100,20 +95,6 @@ const getMarks = async function (req, res) {
         const findData = await marksModel.find(filter)
         return res.status(200).send({status:false, message:"success", data:findData})
 
-     
-    
-    // try {
-
-    //     let filter = req.query
-    //     let { name, subject } = filter;
-    //     let fetchData = { isDeleted: false }
-        
-    //     if (name) {
-    //         fetchData =
-    //     }
-
-    //     const filterAll = await marksModel.find().select({isDeleted:false});
-    //     return res.status(200).send({ status: true, message: "Find all doc", data: filterAll })
 
     }
     catch (error) {
@@ -135,7 +116,7 @@ const updateMarks = async function (req, res) {
 
         let data = req.body
         let markId = req.params.marksId
-        let { name, subject, marks, userId } = data
+        let { name, subject, marks } = data
 
         if (Object.keys(data).length === 0) {
             return res.status(400).send({ status: false, message: "please provide data in the body" })
@@ -150,18 +131,10 @@ const updateMarks = async function (req, res) {
                 return res.status(400).send({ status: false, message: "Incorrect subject" })
 
         }
-          
-        // if ((marks))
-        //     return res.status(400).send({ status: false, message: "marks is required" })
 
-
-        let doc = await userModel.findById({ _id: userId, isDeleted: false })
-        let user_Id = doc._id.toString()
-
-        // Authorization 
-        const tokenId = req.decodedToken.userId;
-        if (user_Id !== tokenId) {
-            return res.status(403).send({ status: false, message: "UnAuthorized" });
+        if (marks) {
+            if (!Number(marks))
+                return res.status(400).send({ status: false, message: "Incorrect marks" })
 
         }
 
@@ -177,7 +150,6 @@ const updateMarks = async function (req, res) {
         });
         return res.status(200).send({ status: true, message: "Success", data: updateData })
 
-      
 
     }
     catch (error) {
@@ -193,14 +165,10 @@ const updateMarks = async function (req, res) {
 const deleteMarks = async function (req, res) {
     try {
 
+
         let markId = req.params.marksId
 
-
-        // const deleteData = await marksModel.findOneAndDelete({ _id: markId ,},  {
-        //     new: true
-        // });
-
-        const deleteData = await marksModel.findOneAndUpdate({ _id: markId },
+        const deleteData = await marksModel.findByIdAndUpdate({ _id: markId },
             { $set: { isDeleted: true } },
             { new: true });
         return res.status(200).send({ status: true, message: "Success", data: deleteData })
@@ -214,8 +182,4 @@ const deleteMarks = async function (req, res) {
 
 }
 
-
-
-
-
-module.exports = { createMarks, getMarks, updateMarks, deleteMarks }
+module.exports = { createMarks, getMarks ,updateMarks,deleteMarks }
