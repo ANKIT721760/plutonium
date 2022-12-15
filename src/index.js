@@ -6,7 +6,7 @@ const router = require("./router/router.js");
 
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://love2rizwan:CodingKe143Deewane@cluster0.xntbvdy.mongodb.net/RizwanDB", {
+mongoose.connect("mongodb+srv://ankit:ri5zuN60qKfv1Ebi@cluster0.dkoko6x.mongodb.net/ankitdb?retryWrites=true&w=majority", {
     useNewUrlParser: true
     
 })
